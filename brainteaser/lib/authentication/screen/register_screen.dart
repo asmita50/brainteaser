@@ -1,14 +1,29 @@
-import 'package:brainteaser/Screen/registerscreen.dart';
+import 'package:brainteaser/authentication/helper/register_helper.dart';
 import 'package:flutter/material.dart';
 
-import 'homepage.dart';
+import '../widgets/custom_text_field.dart';
 
-class Loginscreen extends StatelessWidget {
-  const Loginscreen({super.key});
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
 
+  @override
+  State<RegisterScreen> createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
+  final firstName = TextEditingController();
+  final secondName = TextEditingController();
+  final email = TextEditingController();
+  final password = TextEditingController();
+  final repeatPassword = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.pink[600],
+        elevation: 0,
+        iconTheme: const IconThemeData(color: Colors.black),
+      ),
       backgroundColor: Colors.grey[300],
       body: Stack(children: [
         Column(
@@ -37,7 +52,7 @@ class Loginscreen extends StatelessWidget {
           top: 120,
           left: 20,
           child: Container(
-            height: MediaQuery.of(context).size.height * 0.5,
+            height: MediaQuery.of(context).size.height * 0.8,
             width: MediaQuery.of(context).size.width * 0.9,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
@@ -47,14 +62,49 @@ class Loginscreen extends StatelessWidget {
               padding: const EdgeInsets.all(20.0),
               child: Column(
                 children: [
-                  Text(
-                    'Login',
+                  const Text(
+                    'Register',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   TextFormField(
+                    controller: firstName,
+                    decoration: InputDecoration(
+                      hintText: 'Enter your FullName',
+                      floatingLabelBehavior: FloatingLabelBehavior.always,
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      label: const Text(
+                        'Full Name',
+                        style: TextStyle(
+                            color: Colors.blue, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  TextFormField(
+                    controller: secondName,
+                    decoration: InputDecoration(
+                      hintText: 'Enter your LastName',
+                      floatingLabelBehavior: FloatingLabelBehavior.always,
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      label: const Text(
+                        'LastName',
+                        style: TextStyle(
+                            color: Colors.blue, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  TextFormField(
+                    controller: email,
                     decoration: InputDecoration(
                       hintText: 'Enter your Email',
                       floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -71,6 +121,8 @@ class Loginscreen extends StatelessWidget {
                     height: 20,
                   ),
                   TextFormField(
+                    obscureText: true,
+                    controller: password,
                     decoration: InputDecoration(
                       hintText: 'Enter your Password',
                       floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -83,10 +135,27 @@ class Loginscreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Align(
-                      alignment: Alignment.centerRight,
-                      child: TextButton(
-                          onPressed: () {}, child: Text('Forgot Password'))),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  TextFormField(
+                    obscureText: true,
+                    controller: repeatPassword,
+                    decoration: InputDecoration(
+                      hintText: 'Repeat your Password',
+                      floatingLabelBehavior: FloatingLabelBehavior.always,
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      label: const Text(
+                        'Repeat Password',
+                        style: TextStyle(
+                            color: Colors.blue, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.05,
                     width: MediaQuery.of(context).size.width,
@@ -96,33 +165,13 @@ class Loginscreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(10)),
                             backgroundColor: Colors.green),
                         onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => QuizApp()));
+                          authRegister(email.text, password.text);
                         },
                         child: const Text(
-                          'Login',
+                          'Register',
                           style: TextStyle(fontWeight: FontWeight.bold),
                         )),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text('If you dont have an account ?'),
-                      TextButton(
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => RegisterScreen()));
-                          },
-                          child: const Text(
-                            'Register',
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ))
-                    ],
-                  )
                 ],
               ),
             ),

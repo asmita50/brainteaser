@@ -1,16 +1,14 @@
+import 'package:brainteaser/authentication/screen/register_screen.dart';
 import 'package:flutter/material.dart';
 
-class RegisterScreen extends StatelessWidget {
-  const RegisterScreen({super.key});
+import '../../Screen/homepage.dart';
+
+class Loginscreen extends StatelessWidget {
+  const Loginscreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.pink[600],
-        elevation: 0,
-        iconTheme: IconThemeData(color: Colors.black),
-      ),
       backgroundColor: Colors.grey[300],
       body: Stack(children: [
         Column(
@@ -39,7 +37,7 @@ class RegisterScreen extends StatelessWidget {
           top: 120,
           left: 20,
           child: Container(
-            height: MediaQuery.of(context).size.height * 0.8,
+            height: MediaQuery.of(context).size.height * 0.5,
             width: MediaQuery.of(context).size.width * 0.9,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
@@ -49,41 +47,9 @@ class RegisterScreen extends StatelessWidget {
               padding: const EdgeInsets.all(20.0),
               child: Column(
                 children: [
-                  Text(
-                    'Register',
+                  const Text(
+                    'Login',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  TextFormField(
-                    decoration: InputDecoration(
-                      hintText: 'Enter your FullName',
-                      floatingLabelBehavior: FloatingLabelBehavior.always,
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10)),
-                      label: const Text(
-                        'Full Name',
-                        style: TextStyle(
-                            color: Colors.blue, fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  TextFormField(
-                    decoration: InputDecoration(
-                      hintText: 'Enter your LastName',
-                      floatingLabelBehavior: FloatingLabelBehavior.always,
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10)),
-                      label: const Text(
-                        'LastName',
-                        style: TextStyle(
-                            color: Colors.blue, fontWeight: FontWeight.bold),
-                      ),
-                    ),
                   ),
                   const SizedBox(
                     height: 20,
@@ -117,25 +83,11 @@ class RegisterScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  TextFormField(
-                    decoration: InputDecoration(
-                      hintText: 'Repeat your Password',
-                      floatingLabelBehavior: FloatingLabelBehavior.always,
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10)),
-                      label: const Text(
-                        'Repeat Password',
-                        style: TextStyle(
-                            color: Colors.blue, fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
+                  Align(
+                      alignment: Alignment.centerRight,
+                      child: TextButton(
+                          onPressed: () {},
+                          child: const Text('Forgot Password'))),
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.05,
                     width: MediaQuery.of(context).size.width,
@@ -146,10 +98,28 @@ class RegisterScreen extends StatelessWidget {
                             backgroundColor: Colors.green),
                         onPressed: () {},
                         child: const Text(
-                          'Register',
+                          'Login',
                           style: TextStyle(fontWeight: FontWeight.bold),
                         )),
                   ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text('If you dont have an account ?'),
+                      TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const RegisterScreen()));
+                          },
+                          child: const Text(
+                            'Register',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ))
+                    ],
+                  )
                 ],
               ),
             ),
