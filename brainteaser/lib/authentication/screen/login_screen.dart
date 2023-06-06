@@ -2,36 +2,50 @@ import 'package:brainteaser/authentication/screen/register_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../Screen/homepage.dart';
+import '../helper/login_helper.dart';
 
-class Loginscreen extends StatelessWidget {
+class Loginscreen extends StatefulWidget {
   const Loginscreen({super.key});
+
+  @override
+  State<Loginscreen> createState() => _LoginscreenState();
+}
+
+class _LoginscreenState extends State<Loginscreen> {
+  final email = TextEditingController();
+  final password = TextEditingController();
+  final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[300],
       body: Stack(children: [
-        Column(
-          children: [
-            Container(
-              height: MediaQuery.of(context).size.height * 0.25,
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                  color: Colors.pink[600],
-                  borderRadius: const BorderRadius.only(
-                      bottomLeft: Radius.circular(60),
-                      bottomRight: Radius.circular(60))),
-              child: const Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Quiz app',
-                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                  ),
-                ],
+        Form(
+          key: formKey,
+          child: Column(
+            children: [
+              Container(
+                height: MediaQuery.of(context).size.height * 0.25,
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                    color: Colors.pink[600],
+                    borderRadius: const BorderRadius.only(
+                        bottomLeft: Radius.circular(60),
+                        bottomRight: Radius.circular(60))),
+                child: const Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Quiz app',
+                      style:
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
         Positioned(
           top: 120,
@@ -55,6 +69,7 @@ class Loginscreen extends StatelessWidget {
                     height: 20,
                   ),
                   TextFormField(
+                    controller: email,
                     decoration: InputDecoration(
                       hintText: 'Enter your Email',
                       floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -71,6 +86,7 @@ class Loginscreen extends StatelessWidget {
                     height: 20,
                   ),
                   TextFormField(
+                    controller: password,
                     decoration: InputDecoration(
                       hintText: 'Enter your Password',
                       floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -96,7 +112,9 @@ class Loginscreen extends StatelessWidget {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10)),
                             backgroundColor: Colors.green),
-                        onPressed: () {},
+                        onPressed: () {
+                          authLogin(email.text, password.text);
+                        },
                         child: const Text(
                           'Login',
                           style: TextStyle(fontWeight: FontWeight.bold),
